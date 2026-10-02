@@ -1,0 +1,395 @@
+@import "tailwindcss";
+
+/* ==========================================================
+   VELMOR · IDENTIDAD VISUAL
+   Negro · Dorado · Blanco
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   1. VARIABLES
+   ---------------------------------------------------------- */
+
+:root {
+  --background: #f7f6f2;
+  --foreground: #111111;
+
+  /* Dorados */
+  --velmor-gold: #a88a4a;        /* principal */
+  --velmor-gold-light: #d4b872;  /* brillos, hover sobre negro */
+  --velmor-gold-deep: #8a6d2f;   /* texto pequeño sobre claro (mejor contraste) */
+
+  /* Neutros */
+  --velmor-black: #111111;
+  --velmor-ink: #0a0a0a;
+  --velmor-cream: #f7f6f2;
+  --velmor-white: #ffffff;
+  --velmor-gray: #6b6b6b;
+  --velmor-border: rgba(17, 17, 17, 0.12);
+  --velmor-border-dark: rgba(255, 255, 255, 0.15);
+
+  /* Degradado dorado (el mismo del logo) */
+  --velmor-gold-gradient: linear-gradient(
+    135deg,
+    #f0dfa6 0%,
+    #d4af37 45%,
+    #8a6b1e 100%
+  );
+
+  /* Movimiento */
+  --velmor-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Tailwind v4: expone los tokens como clases (bg-gold, text-gold, font-serif...) */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-gold: var(--velmor-gold);
+  --color-gold-light: var(--velmor-gold-light);
+  --color-gold-deep: var(--velmor-gold-deep);
+  --color-ink: var(--velmor-ink);
+  --color-cream: var(--velmor-cream);
+
+  --font-sans: var(--font-jost, "Helvetica Neue"), Arial, sans-serif;
+  --font-serif: var(--font-cormorant, Georgia), "Times New Roman", serif;
+}
+
+/* ----------------------------------------------------------
+   2. BASE
+   ---------------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* evita que el header tape las secciones al usar #anclas */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* ----------------------------------------------------------
+   3. SELECCIÓN, SCROLLBAR Y FOCO
+   ---------------------------------------------------------- */
+
+::selection {
+  background: var(--velmor-gold);
+  color: var(--velmor-white);
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #b8b5ad var(--velmor-cream);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--velmor-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b8b5ad;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--velmor-gold);
+}
+
+/* Foco visible para quien navega con teclado */
+:focus-visible {
+  outline: 1px solid var(--velmor-gold);
+  outline-offset: 4px;
+}
+
+/* Campos de formulario: línea dorada en lugar del contorno azul del navegador */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--velmor-gold);
+  box-shadow: 0 1px 0 0 var(--velmor-gold);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(17, 17, 17, 0.35);
+}
+
+/* ----------------------------------------------------------
+   4. UTILIDADES DE MARCA
+   ---------------------------------------------------------- */
+
+.velmor-gold {
+  color: var(--velmor-gold);
+}
+
+.velmor-bg-gold {
+  background-color: var(--velmor-gold);
+}
+
+.velmor-border {
+  border-color: var(--velmor-border);
+}
+
+/* Texto con el degradado dorado del logo (úsalo en títulos grandes) */
+.velmor-gold-text {
+  background: var(--velmor-gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Secciones oscuras: selección y foco en dorado claro */
+.velmor-dark {
+  background: var(--velmor-black);
+  color: var(--velmor-white);
+}
+
+.velmor-dark ::selection {
+  background: var(--velmor-gold-light);
+  color: var(--velmor-black);
+}
+
+.velmor-dark :focus-visible {
+  outline-color: var(--velmor-gold-light);
+}
+
+/* Marco fino doble, para recuadros con aire de joyería */
+.velmor-frame {
+  position: relative;
+  border: 1px solid var(--velmor-border-dark);
+}
+
+.velmor-frame::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(168, 138, 74, 0.35);
+  pointer-events: none;
+}
+
+/* ----------------------------------------------------------
+   5. DIVISORES
+   ---------------------------------------------------------- */
+
+.velmor-divider {
+  height: 1px;
+  width: 100%;
+  background: var(--velmor-border);
+}
+
+/* Línea dorada que se desvanece en los extremos */
+.velmor-divider-gold {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--velmor-gold),
+    transparent
+  );
+}
+
+/* ----------------------------------------------------------
+   6. ANIMACIONES DE ENTRADA
+   ---------------------------------------------------------- */
+
+@keyframes velmor-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes velmor-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.velmor-fade-in {
+  animation: velmor-fade-in 0.9s var(--velmor-ease) both;
+}
+
+.velmor-slide-up {
+  animation: velmor-slide-up 1s var(--velmor-ease) 0.15s both;
+}
+
+/* Retrasos opcionales para escalonar elementos */
+.velmor-delay-1 {
+  animation-delay: 0.1s;
+}
+.velmor-delay-2 {
+  animation-delay: 0.25s;
+}
+.velmor-delay-3 {
+  animation-delay: 0.4s;
+}
+
+/* ----------------------------------------------------------
+   7. BOTÓN PREMIUM
+   Fondo negro → dorado, con un destello suave al pasar el mouse
+   ---------------------------------------------------------- */
+
+.velmor-button {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    background-color 0.4s var(--velmor-ease),
+    color 0.4s var(--velmor-ease),
+    transform 0.4s var(--velmor-ease),
+    box-shadow 0.4s var(--velmor-ease);
+}
+
+.velmor-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.8s var(--velmor-ease);
+}
+
+.velmor-button:hover {
+  background-color: var(--velmor-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -12px rgba(168, 138, 74, 0.7);
+}
+
+.velmor-button:hover::before {
+  transform: translateX(120%);
+}
+
+.velmor-button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* ----------------------------------------------------------
+   8. ENLACES CON SUBRAYADO DORADO
+   Uso: <a class="velmor-link">Colección</a>
+   ---------------------------------------------------------- */
+
+.velmor-link {
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.velmor-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 1px;
+  background: var(--velmor-gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s var(--velmor-ease);
+}
+
+.velmor-link:hover {
+  color: var(--velmor-gold);
+}
+
+.velmor-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ----------------------------------------------------------
+   9. PRODUCTOS
+   Uso: contenedor con .velmor-product-card y la imagen con
+   .velmor-product-image. La imagen se acerca dentro de su marco.
+   ---------------------------------------------------------- */
+
+.velmor-product-card {
+  overflow: hidden;
+}
+
+.velmor-product-image {
+  transition:
+    transform 1.2s var(--velmor-ease),
+    filter 0.8s ease;
+}
+
+.velmor-product-card:hover .velmor-product-image,
+.velmor-product-image:hover {
+  transform: scale(1.05);
+}
+
+/* ----------------------------------------------------------
+   10. REDUCCIÓN DE MOVIMIENTO
+   ---------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+  }
+}
